@@ -1,0 +1,4 @@
+includes:
+ - layer:foo-layers/basic
+ - layer:foo-layers/service-charm-dist
+ - interface:foo-layers/prometheus
