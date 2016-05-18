@@ -1,4 +1,5 @@
 includes:
- - layer:foo-layers/basic
- - layer:foo-layers/service-charm-dist
- - interface:foo-layers/prometheus
+ - layer:basic
+ - layer:service-workload
+ - layer:service-charm-dist
+ - interface:prometheus
