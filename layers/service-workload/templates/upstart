@@ -1,0 +1,10 @@
+description "{{manifest.binary}} service"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+respawn
+
+setuid {{manifest.name}}
+setgid {{manifest.name}}
+
+exec {{installed_binary}} {{args}}
