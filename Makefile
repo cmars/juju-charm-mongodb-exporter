@@ -1,15 +1,17 @@
 
-CHARM_REPO := $(shell cd ../..; pwd)
+ifndef JUJU_REPOSITORY
+	$(error JUJU_REPOSITORY is undefined)
+endif
 
-CACHE_GOPATH=$(CHARM_REPO)/cache/gopath/mongodb_exporter
+CACHE_GOPATH=$(JUJU_REPOSITORY)/cache/gopath/mongodb_exporter
 
 BINS=files/mongodb_exporter
 
 .PHONY: all
-all: $(CHARM_REPO)/trusty/mongodb-exporter/metadata.yaml
+all: $(JUJU_REPOSITORY)/trusty/mongodb-exporter/metadata.yaml
 
-$(CHARM_REPO)/trusty/mongodb-exporter/metadata.yaml: $(BINS)
-	JUJU_REPOSITORY=$(CHARM_REPO) charm build -n mongodb-exporter -l debug
+$(JUJU_REPOSITORY)/trusty/mongodb-exporter/metadata.yaml: $(BINS)
+	LAYER_PATH=$(shell pwd)/layers charm build -n mongodb-exporter -l debug
 
 .PHONY: cache
 cache: $(CACHE_GOPATH)/src/github.com/dcu/mongodb_exporter
@@ -26,7 +28,7 @@ files-clean:
 
 .PHONY: charm-clean
 charm-clean:
-	$(RM) -r $(CHARM_REPO)/trusty/mongodb-exporter
+	$(RM) -r $(JUJU_REPOSITORY)/trusty/mongodb-exporter
 
 .PHONY: cache-clean
 cache-clean:
