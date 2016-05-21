@@ -11,7 +11,8 @@ BINS=files/mongodb_exporter
 all: $(JUJU_REPOSITORY)/trusty/mongodb-exporter/metadata.yaml
 
 $(JUJU_REPOSITORY)/trusty/mongodb-exporter/metadata.yaml: $(BINS)
-	LAYER_PATH=$(shell pwd)/layers charm build -n mongodb-exporter -l debug
+	LAYER_PATH=$(shell pwd)/layers INTERFACE_PATH=$(shell pwd)/interfaces \
+		charm build -n mongodb-exporter -l debug
 
 .PHONY: cache
 cache: $(CACHE_GOPATH)/src/github.com/dcu/mongodb_exporter
