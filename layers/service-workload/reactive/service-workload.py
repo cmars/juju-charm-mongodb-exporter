@@ -13,8 +13,6 @@ import service_workload
 
 @hook('install')
 def install():
-    apt_install(['nacl-tools'])
-
     # Stop in case the service was already installed and running. This is more
     # likely to happen when a subordinate is redeployed.
     manifest = service_workload.manifest()
@@ -27,8 +25,6 @@ def install():
 
 @hook('upgrade-charm')
 def upgrade():
-    apt_install(['nacl-tools'])
-
     # TODO: get_state("service-workload.config")
     #       and compare with upgraded, remove old service if name has changed.
     manifest = service_workload.manifest()
